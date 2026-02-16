@@ -27,16 +27,21 @@ export function SettingsModal({ onClose }: Props) {
         </div>
 
         <div className="space-y-4">
+          {/* Status indicator */}
+          <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-sm text-green-700">
+            <span className="font-medium">已就绪</span> — 可直接使用，无需填写 API Key
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              智谱 API Key
+              自定义 API Key（可选）
             </label>
             <div className="relative">
               <input
                 type={showKey ? 'text' : 'password'}
                 value={key}
                 onChange={(e) => setKey(e.target.value)}
-                placeholder="请输入智谱 GLM API Key"
+                placeholder="留空则使用内置服务"
                 className="input-festival pr-10"
               />
               <button
@@ -48,7 +53,7 @@ export function SettingsModal({ onClose }: Props) {
               </button>
             </div>
             <p className="text-xs text-gray-400 mt-1">
-              在 open.bigmodel.cn 获取 API Key，使用 GLM-4-Flash 模型（免费）
+              填写后将直接调用你自己的智谱 GLM-4-Flash，留空则使用内置代理服务
             </p>
           </div>
 
