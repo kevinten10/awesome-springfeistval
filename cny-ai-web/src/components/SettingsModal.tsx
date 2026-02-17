@@ -1,65 +1,62 @@
-import { useState } from 'react'
-import { X, Eye, EyeOff } from 'lucide-react'
-import { useAppStore } from '@/lib/store'
+import { X } from 'lucide-react'
 
 interface Props {
   onClose: () => void
 }
 
 export function SettingsModal({ onClose }: Props) {
-  const { apiKey, setApiKey } = useAppStore()
-  const [key, setKey] = useState(apiKey)
-  const [showKey, setShowKey] = useState(false)
-
-  const handleSave = () => {
-    setApiKey(key.trim())
-    onClose()
-  }
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
       <div className="bg-white rounded-2xl w-full max-w-md p-6 animate-bounce-in">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold">设置</h2>
+          <h2 className="text-lg font-bold">关于</h2>
           <button onClick={onClose} className="p-1 rounded-full hover:bg-gray-100">
             <X size={20} />
           </button>
         </div>
 
-        <div className="space-y-4">
-          {/* Status indicator */}
-          <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-sm text-green-700">
-            <span className="font-medium">已就绪</span> — 可直接使用，无需填写 API Key
+        <div className="space-y-4 text-sm text-gray-600">
+          <div className="bg-red-50 border border-red-100 rounded-xl p-4 text-center">
+            <div className="text-3xl mb-2">🐴</div>
+            <div className="font-bold text-festival-red text-base">马年春节 AI 助手</div>
+            <div className="text-xs text-gray-400 mt-1">2026 · 马到成功</div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              自定义 API Key（可选）
-            </label>
-            <div className="relative">
-              <input
-                type={showKey ? 'text' : 'password'}
-                value={key}
-                onChange={(e) => setKey(e.target.value)}
-                placeholder="留空则使用内置服务"
-                className="input-festival pr-10"
-              />
-              <button
-                type="button"
-                onClick={() => setShowKey(!showKey)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-              >
-                {showKey ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
+          <div className="space-y-2">
+            <div className="flex items-start gap-2">
+              <span className="text-lg">🎊</span>
+              <div>
+                <div className="font-medium text-gray-700">拜年话术</div>
+                <div className="text-xs text-gray-400">AI 生成 8 种关系 × 5 种风格的个性化祝福语</div>
+              </div>
             </div>
-            <p className="text-xs text-gray-400 mt-1">
-              填写后将直接调用你自己的智谱 GLM-4-Flash，留空则使用内置代理服务
-            </p>
+            <div className="flex items-start gap-2">
+              <span className="text-lg">🛡️</span>
+              <div>
+                <div className="font-medium text-gray-700">亲戚防线</div>
+                <div className="text-xs text-gray-400">智能回复 8 类催婚催娃尴尬问题</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-2">
+              <span className="text-lg">🎴</span>
+              <div>
+                <div className="font-medium text-gray-700">贺卡生成</div>
+                <div className="text-xs text-gray-400">4 款精美模板，一键导出分享</div>
+              </div>
+            </div>
           </div>
 
-          <button onClick={handleSave} className="btn-festival w-full">
-            保存
-          </button>
+          <div className="border-t border-gray-100 pt-3 text-xs text-gray-400 text-center space-y-1">
+            <div>AI 由智谱 GLM-4-Flash 驱动</div>
+            <a
+              href="https://github.com/kevinten10/awesome-springfeistval"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-festival-red hover:underline block"
+            >
+              GitHub 开源项目
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -51,7 +51,7 @@ function parseDefenseResponses(raw: string): ParsedDefense[] {
 }
 
 export function RelativeDefense() {
-  const { apiKey, addDefenseHistory } = useAppStore()
+  const { addDefenseHistory } = useAppStore()
   const [question, setQuestion] = useState<DefenseCategory>('relationship')
   const [strategy, setStrategy] = useState<DefenseStrategy>('humor')
   const [context, setContext] = useState('')
@@ -61,17 +61,13 @@ export function RelativeDefense() {
   const [showQuickFire, setShowQuickFire] = useState(true)
 
   const handleGenerate = async () => {
-    if (!apiKey) {
-      setError('请先在设置中填写智谱 API Key')
-      return
-    }
     setLoading(true)
     setError('')
     setResponses([])
     setShowQuickFire(false)
     try {
       const request = { question, strategy, context: context || undefined }
-      const content = await generateDefense(request, apiKey)
+      const content = await generateDefense(request)
       setResponses(parseDefenseResponses(content))
       addDefenseHistory({ request, result: content, timestamp: Date.now() })
     } catch (e) {

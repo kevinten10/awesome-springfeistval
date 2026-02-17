@@ -12,35 +12,14 @@ interface ChatCompletionResponse {
 }
 
 /**
- * Call GLM API.
- * - If apiKey is provided, call ZhiPu directly (user's own key).
- * - If apiKey is empty, call /api/chat proxy (server-side key).
+ * Call GLM API via server-side proxy (/api/chat).
+ * The API key is stored securely in Vercel environment variables.
  */
-export async function callGLM(
-  messages: ChatMessage[],
-  apiKey: string,
-): Promise<string> {
-  const useProxy = !apiKey
-
-  const url = useProxy
-    ? '/api/chat'
-    : 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
-
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-  }
-  if (!useProxy) {
-    headers['Authorization'] = `Bearer ${apiKey}`
-  }
-
-  const response = await fetch(url, {
+export async function callGLM(messages: ChatMessage[]): Promise<string> {
+  const response = await fetch('/api/chat', {
     method: 'POST',
-    headers,
-    body: JSON.stringify(
-      useProxy
-        ? { messages }
-        : { model: 'glm-4-flash', messages, temperature: 0.9, max_tokens: 1024 },
-    ),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages }),
   })
 
   if (!response.ok) {

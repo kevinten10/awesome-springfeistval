@@ -54,7 +54,7 @@ const CONTEXT_EXAMPLES = [
 ]
 
 export function GreetingGenerator() {
-  const { apiKey, addGreetingHistory } = useAppStore()
+  const { addGreetingHistory } = useAppStore()
   const [relationship, setRelationship] = useState<RelationshipType>('elder_family')
   const [style, setStyle] = useState<GreetingStyle>('formal')
   const [recipientName, setRecipientName] = useState('')
@@ -64,16 +64,12 @@ export function GreetingGenerator() {
   const [error, setError] = useState('')
 
   const handleGenerate = async () => {
-    if (!apiKey) {
-      setError('请先在设置中填写智谱 API Key')
-      return
-    }
     setLoading(true)
     setError('')
     setVersions([])
     try {
       const request = { relationship, style, recipientName: recipientName || undefined, context: context || undefined }
-      const content = await generateGreeting(request, apiKey)
+      const content = await generateGreeting(request)
       setVersions(parseGreetingVersions(content))
       addGreetingHistory({ request, result: content, timestamp: Date.now() })
     } catch (e) {

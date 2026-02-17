@@ -27,7 +27,7 @@ const MESSAGE_EXAMPLES = [
 ]
 
 export function CardMaker() {
-  const { apiKey, addCardHistory } = useAppStore()
+  const { addCardHistory } = useAppStore()
   const cardRef = useRef<HTMLDivElement>(null)
 
   const [template, setTemplate] = useState<CardTemplate>('classic')
@@ -40,10 +40,6 @@ export function CardMaker() {
   const [saving, setSaving] = useState(false)
 
   const handleAIGenerate = async () => {
-    if (!apiKey) {
-      setError('请先在设置中填写智谱 API Key')
-      return
-    }
     setLoading(true)
     setError('')
     try {
@@ -54,7 +50,7 @@ export function CardMaker() {
         message: message || undefined,
         template,
       }
-      const content = await generateCardText(request, apiKey)
+      const content = await generateCardText(request)
       setMessage(content)
       addCardHistory({ request, result: content, timestamp: Date.now() })
     } catch (e) {
