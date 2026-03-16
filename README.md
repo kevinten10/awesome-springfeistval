@@ -1,5 +1,7 @@
 <div align="center">
 
+![Awesome Spring Festival Banner](./docs/banner.png)
+
 # 🧧 Awesome Spring Festival
 
 [![License](https://img.shields.io/badge/License-CC0%201.0-blue.svg)](LICENSE)
@@ -83,6 +85,8 @@
 ---
 
 ## 📂 按分类
+
+![Project Categories](./docs/categories.png)
 
 ### 🎆 视觉效果
 
