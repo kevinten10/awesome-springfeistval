@@ -12,10 +12,10 @@ interface ChatCompletionResponse {
 }
 
 /**
- * Call GLM API via server-side proxy (/api/chat).
+ * Call Ark via server-side proxy (/api/chat).
  * The API key is stored securely in Vercel environment variables.
  */
-export async function callGLM(messages: ChatMessage[]): Promise<string> {
+export async function callArk(messages: ChatMessage[]): Promise<string> {
   const response = await fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

@@ -71,7 +71,7 @@ export function Home() {
       {/* Footer */}
       <div className="text-center mt-10 text-gray-400 text-xs">
         <p>🧧 恭喜发财 · 马到成功 · 万事如意 🧧</p>
-        <p className="mt-1">Powered by AI · 智谱 GLM</p>
+        <p className="mt-1">Powered by AI · 火山方舟</p>
       </div>
     </div>
   )

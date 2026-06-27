@@ -1,14 +1,20 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
-const GLM_API_KEY = process.env.GLM_API_KEY || ''
-const GLM_API_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
+const DEFAULT_ARK_BASE_URL = 'https://ark.cn-beijing.volces.com/api/coding/v3'
+const DEFAULT_ARK_MODEL = 'doubao-seed-2-0-code-preview-260215'
+
+function chatCompletionsUrl() {
+  const baseUrl = process.env.ARK_BASE_URL || DEFAULT_ARK_BASE_URL
+  return `${baseUrl.replace(/\/$/, '')}/chat/completions`
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  if (!GLM_API_KEY) {
+  const apiKey = process.env.ARK_API_KEY
+  if (!apiKey) {
     return res.status(500).json({ error: '服务端未配置 API Key' })
   }
 
@@ -21,14 +27,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: '请求参数错误' })
     }
 
-    const response = await fetch(GLM_API_URL, {
+    const response = await fetch(chatCompletionsUrl(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${GLM_API_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'glm-4-flash',
+        model: process.env.ARK_CHAT_MODEL || DEFAULT_ARK_MODEL,
         messages,
         temperature: 0.9,
         max_tokens: 1024,
@@ -38,7 +44,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!response.ok) {
       const errorText = await response.text()
       return res.status(response.status).json({
-        error: `GLM API 错误 (${response.status}): ${errorText}`,
+        error: `Ark API 错误 (${response.status}): ${errorText}`,
       })
     }
 
