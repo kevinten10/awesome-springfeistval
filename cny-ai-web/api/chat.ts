@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
-const DEFAULT_ARK_BASE_URL = 'https://ark.cn-beijing.volces.com/api/coding/v3'
+const DEFAULT_ARK_BASE_URL = 'https://ark.cn-beijing.volces.com/api/plan/v3'
 const DEFAULT_ARK_MODEL = 'doubao-seed-2-0-code-preview-260215'
 
 function chatCompletionsUrl() {

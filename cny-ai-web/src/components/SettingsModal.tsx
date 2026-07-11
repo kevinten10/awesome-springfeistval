@@ -47,7 +47,7 @@ export function SettingsModal({ onClose }: Props) {
           </div>
 
           <div className="border-t border-gray-100 pt-3 text-xs text-gray-400 text-center space-y-1">
-            <div>AI 由火山方舟 Ark CodingPlan 驱动</div>
+            <div>AI 由火山方舟 Ark Agent Plan 驱动</div>
             <a
               href="https://github.com/kevinten10/awesome-springfeistval"
               target="_blank"

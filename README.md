@@ -28,7 +28,7 @@
 | 🛡️ **亲戚防线** | 智能化解 8 类催婚催娃尴尬问题，5 种应对策略，内置快速回复 |
 | 🎴 **AI 贺卡生成** | 4 款精美模板（古典红金/现代简约/可爱卡通/水墨书法），一键保存图片 |
 
-**技术栈：** React 18 + TypeScript + Vite + Tailwind CSS + Volcengine Ark CodingPlan + Vercel
+**技术栈：** React 18 + TypeScript + Vite + Tailwind CSS + Volcengine Ark Agent Plan + Vercel
 
 📦 **源码：** [cny-ai-web/](./cny-ai-web/)
 
